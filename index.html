@@ -14,6 +14,14 @@
     --dark:  #1C2B3A;
     --cream: #FFF8E8;
     --white: #FFFFFF;
+    --blue-tint: #A8C8E0;
+    --blue-dark: #C8DCF0;
+
+    --font-serif: 'Cormorant Garamond', serif;
+    --font-sans:  'DM Sans', sans-serif;
+
+    --section-padding: 80px 24px;
+    --max-width: 680px;
   }
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -21,7 +29,7 @@
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'DM Sans', sans-serif;
+    font-family: var(--font-sans);
     background: var(--white);
     color: var(--dark);
     overflow-x: hidden;
@@ -37,6 +45,40 @@
     z-index: 0;
   }
 
+  /* ── TYPOGRAPHY UTILITIES ── */
+  .label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: block;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes strikeIn {
+    to { transform: scaleX(1); }
+  }
+
+  .anim-1 { opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
+  .anim-2 { opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s; }
+  .anim-3 { opacity: 0; animation: fadeUp 0.8s ease forwards 0.7s; }
+  .anim-4 { opacity: 0; animation: fadeUp 0.8s ease forwards 0.9s; }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
   /* ── HERO ── */
   .hero {
     background: var(--navy);
@@ -50,6 +92,7 @@
     overflow: hidden;
   }
 
+  /* White wave at bottom — hidden in coming-soon mode */
   .hero::after {
     content: '';
     position: absolute;
@@ -60,20 +103,20 @@
     clip-path: ellipse(60% 100% at 50% 100%);
   }
 
+  body.coming-soon .hero::after { display: none; }
+
   .hero-brand {
-    font-family: 'DM Sans', sans-serif;
+    font-family: var(--font-sans);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 4px;
     text-transform: uppercase;
     color: var(--gold);
     margin-bottom: 56px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.2s;
   }
 
   .hero-headline {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-serif);
     font-size: clamp(42px, 8vw, 80px);
     font-weight: 300;
     color: var(--white);
@@ -81,19 +124,11 @@
     line-height: 1.1;
     max-width: 820px;
     margin-bottom: 12px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.4s;
   }
 
-  .hero-headline em {
-    font-style: italic;
-    color: var(--gold);
-  }
+  .hero-headline em { font-style: italic; color: var(--gold); }
 
-  .hero-headline .strike {
-    position: relative;
-    display: inline-block;
-  }
+  .hero-headline .strike { position: relative; display: inline-block; }
   .hero-headline .strike::after {
     content: '';
     position: absolute;
@@ -107,16 +142,13 @@
   }
 
   .hero-sub {
-    font-family: 'DM Sans', sans-serif;
     font-size: clamp(15px, 2vw, 18px);
     font-weight: 300;
-    color: #A8C8E0;
+    color: var(--blue-tint);
     text-align: center;
     max-width: 560px;
     line-height: 1.7;
     margin-top: 28px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.7s;
   }
 
   .hero-divider {
@@ -124,18 +156,13 @@
     height: 1px;
     background: var(--gold);
     margin: 40px auto;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.9s;
   }
 
   /* ── HOOK ── */
-  .hook {
-    padding: 100px 24px 80px;
-    text-align: center;
-  }
+  .hook { padding: 100px 24px 80px; text-align: center; }
 
   .hook p {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-serif);
     font-size: clamp(22px, 3.5vw, 34px);
     font-weight: 300;
     color: var(--navy);
@@ -144,34 +171,15 @@
     line-height: 1.5;
   }
 
-  .hook p em {
-    font-style: italic;
-    color: var(--gold);
-  }
+  .hook p em { font-style: italic; color: var(--gold); }
 
   /* ── PROBLEM ── */
-  .problem {
-    background: var(--light);
-    padding: 80px 24px;
-  }
+  .problem { background: var(--light); padding: var(--section-padding); }
 
-  .problem-inner {
-    max-width: 680px;
-    margin: 0 auto;
-  }
-
-  .label {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 24px;
-    display: block;
-  }
+  .problem-inner { max-width: var(--max-width); margin: 0 auto; }
 
   .problem h2 {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-serif);
     font-size: clamp(28px, 4vw, 42px);
     font-weight: 400;
     color: var(--navy);
@@ -179,10 +187,7 @@
     line-height: 1.2;
   }
 
-  .problem-items {
-    list-style: none;
-    margin: 32px 0;
-  }
+  .problem-items { list-style: none; margin: 32px 0; }
 
   .problem-items li {
     display: flex;
@@ -206,7 +211,7 @@
   }
 
   .problem-close {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-serif);
     font-size: clamp(18px, 2.5vw, 24px);
     font-weight: 300;
     font-style: italic;
@@ -219,48 +224,36 @@
 
   /* ── POSITIONING ── */
   .positioning {
-    padding: 80px 24px;
-    max-width: 680px;
+    padding: var(--section-padding);
+    max-width: var(--max-width);
     margin: 0 auto;
     text-align: center;
   }
 
   .positioning p {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-serif);
     font-size: clamp(20px, 3vw, 30px);
     font-weight: 300;
     color: var(--navy);
     line-height: 1.6;
   }
 
-  .positioning p strong {
-    font-weight: 600;
-    color: var(--gold);
-  }
+  .positioning p strong { font-weight: 600; color: var(--gold); }
 
   /* ── WHAT YOU GET ── */
-  .gets {
-    background: var(--navy);
-    padding: 80px 24px;
-    position: relative;
-  }
+  .gets { background: var(--navy); padding: var(--section-padding); }
 
-  .gets-inner {
-    max-width: 680px;
-    margin: 0 auto;
-  }
+  .gets-inner { max-width: var(--max-width); margin: 0 auto; }
 
   .gets h2 {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-serif);
     font-size: clamp(28px, 4vw, 40px);
     font-weight: 300;
     color: var(--white);
     margin-bottom: 48px;
   }
 
-  .gets-list {
-    list-style: none;
-  }
+  .gets-list { list-style: none; }
 
   .gets-list li {
     display: grid;
@@ -273,8 +266,8 @@
 
   .gets-list li:last-child { border-bottom: none; }
 
-  .gets-list li .num {
-    font-family: 'Cormorant Garamond', serif;
+  .gets-list .num {
+    font-family: var(--font-serif);
     font-size: 28px;
     font-weight: 300;
     color: var(--gold);
@@ -282,19 +275,15 @@
     padding-top: 2px;
   }
 
-  .gets-list li .text {
+  .gets-list .text {
     font-size: 16px;
-    color: #C8DCF0;
+    color: var(--blue-dark);
     line-height: 1.6;
     font-weight: 300;
   }
 
   /* ── AUTHORITY ── */
-  .authority {
-    padding: 80px 24px;
-    max-width: 680px;
-    margin: 0 auto;
-  }
+  .authority { padding: var(--section-padding); max-width: var(--max-width); margin: 0 auto; }
 
   .authority-box {
     background: var(--cream);
@@ -303,33 +292,13 @@
     border-radius: 0 8px 8px 0;
   }
 
-  .authority-box p {
-    font-size: 16px;
-    color: var(--dark);
-    line-height: 1.7;
-    font-weight: 300;
-  }
-
+  .authority-box p { font-size: 16px; color: var(--dark); line-height: 1.7; font-weight: 300; }
   .authority-box p + p { margin-top: 16px; }
 
-  .authority-box .author {
-    margin-top: 24px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
+  .authority-box .author { margin-top: 24px; display: flex; align-items: center; gap: 12px; }
 
-  .author-name {
-    font-weight: 500;
-    color: var(--navy);
-    font-size: 15px;
-  }
-
-  .author-role {
-    font-size: 13px;
-    color: var(--muted);
-    font-style: italic;
-  }
+  .author-name { font-weight: 500; color: var(--navy); font-size: 15px; }
+  .author-role { font-size: 13px; color: var(--muted); font-style: italic; }
 
   /* ── FORM ── */
   .form-section {
@@ -340,6 +309,7 @@
     overflow: hidden;
   }
 
+  /* White wave at top — hidden in coming-soon mode */
   .form-section::before {
     content: '';
     position: absolute;
@@ -350,6 +320,9 @@
     clip-path: ellipse(60% 100% at 50% 0%);
   }
 
+  body.coming-soon .form-section::before { display: none; }
+  body.coming-soon .form-section { padding-top: 60px; }
+
   .form-inner {
     max-width: 520px;
     margin: 0 auto;
@@ -358,7 +331,7 @@
   }
 
   .form-section h2 {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-serif);
     font-size: clamp(32px, 5vw, 52px);
     font-weight: 300;
     color: var(--white);
@@ -368,27 +341,20 @@
 
   .form-section .sub {
     font-size: 15px;
-    color: #A8C8E0;
+    color: var(--blue-tint);
     font-weight: 300;
     margin-bottom: 48px;
     line-height: 1.6;
   }
 
-  .form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 12px;
-  }
-
-  @media (max-width: 480px) { .form-grid { grid-template-columns: 1fr; } }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
 
   input[type="text"],
   input[type="email"] {
     width: 100%;
     padding: 16px 20px;
     font-size: 15px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: var(--font-sans);
     background: rgba(255,255,255,0.08);
     border: 1px solid rgba(200, 151, 58, 0.3);
     border-radius: 8px;
@@ -398,17 +364,13 @@
   }
 
   input::placeholder { color: rgba(168,200,224,0.5); }
-
-  input:focus {
-    border-color: var(--gold);
-    background: rgba(255,255,255,0.12);
-  }
+  input:focus { border-color: var(--gold); background: rgba(255,255,255,0.12); }
 
   .btn-main {
     width: 100%;
     padding: 18px 32px;
     font-size: 16px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: var(--font-sans);
     font-weight: 500;
     background: var(--gold);
     color: var(--navy);
@@ -420,7 +382,7 @@
     letter-spacing: 0.3px;
   }
 
-  .btn-main:hover { opacity: 0.9; transform: translateY(-1px); }
+  .btn-main:hover  { opacity: 0.9; transform: translateY(-1px); }
   .btn-main:active { transform: translateY(0); }
 
   .form-trust {
@@ -431,14 +393,10 @@
   }
 
   /* ── CLOSING ── */
-  .closing {
-    padding: 100px 24px 120px;
-    text-align: center;
-    background: var(--white);
-  }
+  .closing { padding: 100px 24px 120px; text-align: center; background: var(--white); }
 
   .closing-quote {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-serif);
     font-size: clamp(24px, 4vw, 44px);
     font-weight: 300;
     color: var(--navy);
@@ -447,10 +405,7 @@
     line-height: 1.4;
   }
 
-  .closing-quote em {
-    font-style: italic;
-    color: var(--gold);
-  }
+  .closing-quote em { font-style: italic; color: var(--gold); }
 
   .closing-quote .ellipsis {
     display: block;
@@ -461,16 +416,13 @@
   }
 
   .closing-sig {
-    margin-top: 56px;
+    margin-top: 64px;
     font-size: 14px;
     color: var(--muted);
     letter-spacing: 1px;
   }
 
-  .closing-sig span {
-    color: var(--gold);
-    font-weight: 500;
-  }
+  .closing-sig span { color: var(--gold); font-weight: 500; }
 
   /* ── FOOTER ── */
   footer {
@@ -483,141 +435,119 @@
 
   footer a { color: var(--gold); text-decoration: none; }
 
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes strikeIn {
-    to { transform: scaleX(1); }
-  }
-
-  /* Scroll reveal */
-  .reveal {
-    opacity: 0;
-    transform: translateY(32px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .footer-links { margin-top: 8px; }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 600px) {
-    .hero { padding: 60px 20px 90px; }
-    .hook, .problem, .positioning, .authority, .closing { padding: 60px 20px; }
-    .gets { padding: 60px 20px; }
-    .form-section { padding: 80px 20px; }
+    .hero          { padding: 60px 20px 90px; }
+    .hook          { padding: 60px 20px; }
+    .problem       { padding: 60px 20px; }
+    .positioning   { padding: 60px 20px; }
+    .authority     { padding: 60px 20px; }
+    .closing       { padding: 60px 20px; }
+    .gets          { padding: 60px 20px; }
+    .form-section  { padding: 80px 20px; }
   }
+
+  @media (max-width: 480px) { .form-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-brand">Laura Gheorghică · LIMITS</div>
-  <h1 class="hero-headline">
+  <div class="hero-brand anim-1">Laura Gheorghică · LIMITS</div>
+  <h1 class="hero-headline anim-2">
     Te simți înțeles.<br>
     Dar, de fapt…<br>
     <em class="strike">nu ești.</em>
   </h1>
-  <div class="hero-divider"></div>
-  <p class="hero-sub">Un ghid gratuit despre cum să folosești AI fără să-ți pierzi claritatea, limitele și relațiile.</p>
+  <div class="hero-divider anim-4"></div>
+  <p class="hero-sub anim-3">Un ghid gratuit despre cum să folosești AI fără să-ți pierzi claritatea, limitele și relațiile.</p>
 </section>
 
-<!-- HOOK -->
-<section class="hook">
-  <p class="reveal">
-    Trăim într-o perioadă în care avem răspunsuri la orice.<br>
-    Dar ne simțim din ce în ce mai puțin <em>auziți.</em><br><br>
-    Și, mai subtil…<br>
-    începem să nu ne mai auzim <em>nici pe noi.</em>
-  </p>
-</section>
+<!-- ═══════════════════════════════════════════
+     MAIN CONTENT  (hidden in coming-soon mode)
+     ═══════════════════════════════════════════ -->
+<div id="main-content">
 
-<!-- PROBLEM -->
-<section class="problem">
-  <div class="problem-inner reveal">
-    <span class="label">Recunoaștere</span>
-    <h2>Poate ai făcut deja asta:</h2>
-    <ul class="problem-items">
-      <li>ai întrebat AI-ul ce să faci într-o relație</li>
-      <li>ai căutat validare că ai dreptate</li>
-      <li>ai încercat să înțelegi mai repede, mai logic, mai „corect"</li>
-    </ul>
-    <p class="problem-close">
-      Și, pentru moment… a ajutat.<br><br>
-      Dar ceva nu s-a schimbat cu adevărat.<br><br>
-      Pentru că nu e doar despre ce știi. E despre cum gândești. Și cât de mult rămâi în relație cu tine.
+  <!-- HOOK -->
+  <section class="hook">
+    <p class="reveal">
+      Trăim într-o perioadă în care avem răspunsuri la orice.<br>
+      Dar ne simțim din ce în ce mai puțin <em>auziți.</em><br><br>
+      Și, mai subtil…<br>
+      începem să nu ne mai auzim <em>nici pe noi.</em>
     </p>
-  </div>
-</section>
+  </section>
 
-<!-- POSITIONING -->
-<section class="positioning">
-  <p class="reveal">
-    Acest ghid nu îți spune ce să faci.<br><br>
-    Te ajută să înțelegi: <strong>unde te ajută AI-ul</strong> și unde începe, subtil, <strong>să te înlocuiască.</strong>
-  </p>
-</section>
+  <!-- PROBLEM -->
+  <section class="problem">
+    <div class="problem-inner reveal">
+      <span class="label">Recunoaștere</span>
+      <h2>Poate ai făcut deja asta:</h2>
+      <ul class="problem-items">
+        <li>ai întrebat AI-ul ce să faci într-o relație</li>
+        <li>ai căutat validare că ai dreptate</li>
+        <li>ai încercat să înțelegi mai repede, mai logic, mai „corect"</li>
+      </ul>
+      <p class="problem-close">
+        Și, pentru moment… a ajutat.<br><br>
+        Dar ceva nu s-a schimbat cu adevărat.<br><br>
+        Pentru că nu e doar despre ce știi. E despre cum gândești. Și cât de mult rămâi în relație cu tine.
+      </p>
+    </div>
+  </section>
 
-<!-- WHAT YOU GET -->
-<section class="gets">
-  <div class="gets-inner reveal">
-    <span class="label" style="color: var(--gold);">Ce vei înțelege</span>
-    <h2>Ghidul îți răspunde la întrebările<br>pe care nu știai că le ai</h2>
-    <ul class="gets-list">
-      <li>
-        <span class="num">01</span>
-        <span class="text">De ce AI-ul pare că te „înțelege", dar nu o face</span>
-      </li>
-      <li>
-        <span class="num">02</span>
-        <span class="text">Cum îți poate influența deciziile fără să-ți dai seama</span>
-      </li>
-      <li>
-        <span class="num">03</span>
-        <span class="text">Ce întrebări să pui ca să gândești mai bine, nu în locul tău</span>
-      </li>
-      <li>
-        <span class="num">04</span>
-        <span class="text">Cum să-l folosești ca instrument, nu ca refugiu</span>
-      </li>
-      <li>
-        <span class="num">05</span>
-        <span class="text">Unde este limita dintre reflecție și dependență</span>
-      </li>
-    </ul>
-  </div>
-</section>
+  <!-- POSITIONING -->
+  <section class="positioning">
+    <p class="reveal">
+      Acest ghid nu îți spune ce să faci.<br><br>
+      Te ajută să înțelegi: <strong>unde te ajută AI-ul</strong> și unde începe, subtil, <strong>să te înlocuiască.</strong>
+    </p>
+  </section>
 
-<!-- AUTHORITY -->
-<section class="authority">
-  <div class="authority-box reveal">
-    <p>Un ghid bazat pe cercetări recente și experiență reală de lucru cu oameni în procese relaționale.</p>
-    <p>Scris simplu. Direct. Fără să te sperie, dar fără să-ți ascundă realitatea.</p>
-    <div class="author">
-      <div>
-        <div class="author-name">Laura Gheorghică</div>
-        <div class="author-role">Specialist în relații și dinamici de conflict · LIMITS</div>
+  <!-- WHAT YOU GET -->
+  <section class="gets">
+    <div class="gets-inner reveal">
+      <span class="label">Ce vei înțelege</span>
+      <h2>Ghidul îți răspunde la întrebările<br>pe care nu știai că le ai</h2>
+      <ul class="gets-list">
+        <li><span class="num">01</span><span class="text">De ce AI-ul pare că te „înțelege", dar nu o face</span></li>
+        <li><span class="num">02</span><span class="text">Cum îți poate influența deciziile fără să-ți dai seama</span></li>
+        <li><span class="num">03</span><span class="text">Ce întrebări să pui ca să gândești mai bine, nu în locul tău</span></li>
+        <li><span class="num">04</span><span class="text">Cum să-l folosești ca instrument, nu ca refugiu</span></li>
+        <li><span class="num">05</span><span class="text">Unde este limita dintre reflecție și dependență</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- AUTHORITY -->
+  <section class="authority">
+    <div class="authority-box reveal">
+      <p>Un ghid bazat pe cercetări recente și experiență reală de lucru cu oameni în procese relaționale.</p>
+      <p>Scris simplu. Direct. Fără să te sperie, dar fără să-ți ascundă realitatea.</p>
+      <div class="author">
+        <div>
+          <div class="author-name">Laura Gheorghică</div>
+          <div class="author-role">Specialist în relații și dinamici de conflict · LIMITS</div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FORM -->
+</div><!-- /#main-content -->
+
+<!-- FORM (always visible) -->
 <section class="form-section">
   <div class="form-inner">
     <h2>Lasă adresa ta de email<br>și îți trimit ghidul.</h2>
     <p class="sub">Imediat. Gratuit. Fără promisiuni de spam.</p>
 
-    <form action="https://formspree.io/f/mwvaanlw"
-          method="POST">
+    <form action="https://formspree.io/f/mwvaanlw" method="POST">
       <div class="form-grid">
-        <input type="text" placeholder="Prenume" name="prenume" autocomplete="given-name">
-        <input type="email" placeholder="Adresă de email" name="email" autocomplete="email">
+        <input type="text"  name="prenume" placeholder="Prenume"         autocomplete="given-name">
+        <input type="email" name="email"   placeholder="Adresă de email" autocomplete="email">
       </div>
       <button type="submit" class="btn-main">👉 Trimite-mi ghidul</button>
     </form>
@@ -626,13 +556,13 @@
   </div>
 </section>
 
-<!-- CLOSING -->
-<section class="closing">
+<!-- CLOSING (hidden in coming-soon mode) -->
+<section class="closing" id="closing-section">
   <div class="closing-quote reveal">
     AI-ul poate fi un instrument puternic.
     <span class="ellipsis">Dar relațiile…<br>acelea sunt ale tale.</span>
   </div>
-  <p class="closing-sig reveal" style="margin-top: 64px;">
+  <p class="closing-sig reveal">
     <span>@laura.gheorghica</span> pe Facebook și Instagram
   </p>
 </section>
@@ -640,7 +570,7 @@
 <!-- FOOTER -->
 <footer>
   <p>© LIMITS · Laura Gheorghică · Claritate. Putere. Vindecare.</p>
-  <p style="margin-top: 8px;">
+  <p class="footer-links">
     <a href="https://www.facebook.com/laura.gheorghica">Facebook</a>
     &nbsp;·&nbsp;
     <a href="https://www.instagram.com/laura.gheorghica">Instagram</a>
@@ -648,18 +578,30 @@
 </footer>
 
 <script>
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(el => {
-      if (el.isIntersecting) {
-        el.target.classList.add('visible');
-        observer.unobserve(el.target);
-      }
-    });
-  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  // ─────────────────────────────────────────────────────────
+  //  MODE SWITCH
+  //  true  → coming soon (hero + form only)
+  //  false → full landing page
+  // ─────────────────────────────────────────────────────────
+  const COMING_SOON = true;
 
-  reveals.forEach(el => observer.observe(el));
+  if (COMING_SOON) {
+    document.body.classList.add('coming-soon');
+    document.getElementById('main-content').style.display    = 'none';
+    document.getElementById('closing-section').style.display = 'none';
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(
+    (entries) => entries.forEach(({ target, isIntersecting }) => {
+      if (!isIntersecting) return;
+      target.classList.add('visible');
+      observer.unobserve(target);
+    }),
+    { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+  );
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
